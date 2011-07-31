@@ -21,6 +21,8 @@
 
 #include "JoystickDevices.h"
 
+using namespace System::Collections::Generic;
+
 namespace XnaJoystick
 {	
 	static BOOL CALLBACK EnumJoysticksCallback(const DIDEVICEINSTANCE *pdidInstance,VOID* pContext);
@@ -40,7 +42,7 @@ namespace XnaJoystick
     }
 	}
 	
-	JoystickDevices::JoystickDevices(void):mDI(NULL),mNoJoystick(false),mDevices(gcnew List<JoystickDevice^>())
+	JoystickDevices::JoystickDevices(void):mDI(NULL),mNoJoystick(false),mDevices(gcnew array<JoystickDevice^> {})
 	{
 		HRESULT pResult;
 		LPVOID pDI;
@@ -53,13 +55,28 @@ namespace XnaJoystick
 		{
 			mDI=(LPDIRECTINPUT8)pDI;
 			if (GetDevices())
-				mNoJoystick=mDevices->Count>0;
+				mNoJoystick=mDevices->Length>0;
 		}
 	}
 
 	JoystickDevices::~JoystickDevices()
 	{
 		SAFE_RELEASE(mDI);
+	}
+
+	bool JoystickDevices::NoJoystick::get()
+	{
+		return mNoJoystick;
+	}
+	
+	array<JoystickDevice^> ^JoystickDevices::Devices::get()
+	{
+		return mDevices;
+	}
+
+	int JoystickDevices::NumberJoystick::get()
+	{
+		return mDevices->Length;
 	}
 
 	bool JoystickDevices::GetDevices()
@@ -71,8 +88,10 @@ namespace XnaJoystick
 		if( FAILED( mDI->EnumDevices( DI8DEVCLASS_GAMECTRL,EnumJoysticksCallback,&pEnumContext, DIEDFL_ATTACHEDONLY)))
 			return false;
 		std::vector<LPDIRECTINPUTDEVICE8>::iterator it=pEnumContext.devices.begin(),itend=pEnumContext.devices.end();
+		List<JoystickDevice^> ^pDevices=gcnew List<JoystickDevice^>();
 		for (;it!=itend;it++)
-			mDevices->Add(gcnew JoystickDevice(*it));
+			pDevices->Add(gcnew JoystickDevice(*it));
+		mDevices=pDevices->ToArray();
 
 		return true;
 	}

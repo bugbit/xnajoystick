@@ -24,8 +24,6 @@
 
 #include "JoystickDevice.h"
 
-using namespace System::Collections::Generic;
-
 namespace XnaJoystick
 {
 		struct DI_ENUM_CONTEXT
@@ -41,25 +39,14 @@ namespace XnaJoystick
 			public:
 				static JoystickDevices ^GetInstance();
 				~JoystickDevices();
-				property bool NoJoystick
-				{
-					bool get()
-					{
-						return mNoJoystick;
-					}
-				}
-				property List<JoystickDevice^> ^Devices
-				{
-					List<JoystickDevice^> ^get()
-					{
-						return mDevices;
-					}
-				}
+				property bool NoJoystick { bool get(); }
+				property array<JoystickDevice^> ^Devices { array<JoystickDevice^> ^get(); }
+				property int NumberJoystick { int get(); }
 			private:
 				static JoystickDevices ^mInstance=nullptr;
 				LPDIRECTINPUT8 mDI;
 				bool mNoJoystick;
-				List<JoystickDevice^> ^mDevices;
+				array<JoystickDevice^> ^mDevices;
 				
 				static void CreateInstance();
 				//std::vector<LPDIRECTINPUTDEVICE8> mDevices;

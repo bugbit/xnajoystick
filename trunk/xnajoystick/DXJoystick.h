@@ -30,5 +30,7 @@ namespace XnaJoystick
 			static JoystickState GetState(int argIndex);
 			static JoystickState GetState(PlayerIndex argPlayerIndex);
 			static JoystickState GetState();
+			static property bool NoJoystick { bool get(); }
+			static property int NumberJoystick { int get(); }
 	};
 };
