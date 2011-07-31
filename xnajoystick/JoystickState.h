@@ -26,7 +26,6 @@ namespace XnaJoystick
 	public value struct JoystickState
 	{
 	public:
-		//JoystickState();
 		JoystickState(DIJOYSTATE2 &argJoyState);
 		property bool IsConnected
 		{
