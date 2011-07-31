@@ -21,14 +21,14 @@
 
 namespace XnaJoystick
 {
-	JoystickState::JoystickState()
+	/*JoystickState::JoystickState()
 	{
 		mConnected=false;
 		mButtons=gcnew JoystickButtons();
-	}
+	}*/
 
 	JoystickState::JoystickState(DIJOYSTATE2 &argJoyState)
 	{
-		mButtons=gcnew JoystickButtons(argJoyState.rgbButtons,sizeof(argJoyState.rgbButtons));
+		mButtons=JoystickButtons(argJoyState.rgbButtons,sizeof(argJoyState.rgbButtons));
 	}
 };

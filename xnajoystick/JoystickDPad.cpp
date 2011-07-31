@@ -15,35 +15,13 @@
 //   You should have received a copy of the GNU General Public License
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
+#include "StdAfx.h"
 
-#include <dinput.h>
-
-#include "JoystickButtons.h"
+#include "JoystickDPad.h"
 
 namespace XnaJoystick
 {
-	public value struct JoystickState
+	JoystickDPad::JoystickDPad(DWORD POV)
 	{
-	public:
-		//JoystickState();
-		JoystickState(DIJOYSTATE2 &argJoyState);
-		property bool IsConnected
-		{
-			bool get()
-			{
-				return mConnected;
-			}
-		}
-		property JoystickButtons Buttons
-		{
-			JoystickButtons get()
-			{
-				return mButtons;
-			}
-		}
-	private:
-		bool mConnected;
-		JoystickButtons mButtons;
-	};
+	}
 };

@@ -212,6 +212,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JoystickDPad.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\JoystickState.cpp"
 				>
 			</File>
@@ -259,6 +263,10 @@
 			</File>
 			<File
 				RelativePath=".\JoystickDevices.h"
+				>
+			</File>
+			<File
+				RelativePath=".\JoystickDPad.h"
 				>
 			</File>
 			<File

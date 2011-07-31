@@ -47,13 +47,13 @@ namespace XnaJoystick
 		SAFE_RELEASE(mDevice);
 	}
 
-	JoystickState ^JoystickDevice::GetState()
+	JoystickState JoystickDevice::GetState()
 	{
 		HRESULT pResult;
 		DIJOYSTATE2 pJoyState;
 
 		if (mDevice==NULL)
-			return gcnew JoystickState();
+			return JoystickState();
 		pResult=mDevice->Poll();
 		if(FAILED(pResult))
     {
@@ -68,11 +68,11 @@ namespace XnaJoystick
         // hr may be DIERR_OTHERAPPHASPRIO or other errors.  This
         // may occur when the app is minimized or in the process of 
         // switching, so just try again later 
-        return gcnew JoystickState();
+        return JoystickState();
     }
 		if (FAILED(pResult=mDevice->GetDeviceState(sizeof(DIJOYSTATE2),&pJoyState)))
-			return gcnew JoystickState();
+			return JoystickState();
 
-		return gcnew JoystickState(pJoyState);
+		return JoystickState(pJoyState);
 	}
 };

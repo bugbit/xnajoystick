@@ -25,7 +25,7 @@ using namespace System;
 
 namespace XnaJoystick
 {
-	ref struct JoystickState;
+	value struct JoystickState;
 
 	public ref class JoystickDevice : public IDisposable
 	{
@@ -33,7 +33,7 @@ namespace XnaJoystick
 		JoystickDevice(LPDIRECTINPUTDEVICE8 argDevice);
 		~JoystickDevice(void);
 		!JoystickDevice(void);
-		JoystickState ^GetState();
+		JoystickState GetState();
 	private:
 		// Track whether Dispose has been called.
 		 bool mDisposed;
