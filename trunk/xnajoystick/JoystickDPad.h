@@ -26,7 +26,11 @@ namespace XnaJoystick
 	public value struct JoystickDPad
 	{
 		public:
-			JoystickDPad(DWORD POV);
+			JoystickDPad(DWORD argPOV);
+			property ButtonState Up { ButtonState get(); }
+			property ButtonState Right { ButtonState get(); }
+			property ButtonState Down { ButtonState get(); }
+			property ButtonState Left { ButtonState get(); }
 		private:
 			ButtonState mUp;
 			ButtonState mRight;

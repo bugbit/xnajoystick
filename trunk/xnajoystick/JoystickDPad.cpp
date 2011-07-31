@@ -21,7 +21,46 @@
 
 namespace XnaJoystick
 {
-	JoystickDPad::JoystickDPad(DWORD POV)
+	JoystickDPad::JoystickDPad(DWORD argPOV)
 	{
+		mUp = ButtonState::Released;
+		mRight = ButtonState::Released;
+		mDown = ButtonState::Released;
+		mLeft = ButtonState::Released;
+
+		if (argPOV == -1)
+			return;
+
+		if (argPOV > 27000 || argPOV < 9000)
+			mUp = ButtonState::Pressed;
+
+		if (0 < argPOV && argPOV < 18000)
+			mRight = ButtonState::Pressed;
+
+		if (9000 < argPOV && argPOV < 27000)
+			mDown = ButtonState::Pressed;
+
+		if (18000 < argPOV)
+			mLeft = ButtonState::Pressed;
+	}
+
+	ButtonState JoystickDPad::Up::get()
+	{
+		return mUp;
+	}
+
+	ButtonState JoystickDPad::Right::get()
+	{
+		return mRight;
+	}
+
+	ButtonState JoystickDPad::Down::get()
+	{
+		return mDown;
+	}
+
+	ButtonState JoystickDPad::Left::get()
+	{
+		return mLeft;
 	}
 };

@@ -20,6 +20,7 @@
 #include <dinput.h>
 
 #include "JoystickButtons.h"
+#include "JoystickDPad.h"
 
 namespace XnaJoystick
 {
@@ -34,15 +35,12 @@ namespace XnaJoystick
 				return mConnected;
 			}
 		}
-		property JoystickButtons Buttons
-		{
-			JoystickButtons get()
-			{
-				return mButtons;
-			}
-		}
+		property JoystickButtons Buttons { JoystickButtons get(); }
+		property JoystickDPad DPad { JoystickDPad get(); }
+
 	private:
 		bool mConnected;
 		JoystickButtons mButtons;
+		JoystickDPad mDPad;
 	};
 };
