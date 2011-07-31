@@ -24,5 +24,16 @@ namespace XnaJoystick
 	JoystickState::JoystickState(DIJOYSTATE2 &argJoyState)
 	{
 		mButtons=JoystickButtons(argJoyState.rgbButtons,sizeof(argJoyState.rgbButtons));
+		mDPad=JoystickDPad(argJoyState.rgdwPOV[0]);
+	}
+
+	JoystickButtons JoystickState::Buttons::get()
+	{
+		return mButtons;
+	}
+
+	JoystickDPad JoystickState::DPad::get()
+	{
+		return mDPad;
 	}
 };
