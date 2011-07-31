@@ -24,12 +24,22 @@ namespace XnaJoystick
 {
 	JoystickState Joystick::GetState(int argIndex)
 	{
-		List<JoystickDevice^> ^pDevices=JoystickDevices::GetInstance()->Devices;
+		array<JoystickDevice^> ^pDevices=JoystickDevices::GetInstance()->Devices;
 
-		if (argIndex<0 || argIndex>=pDevices->Count)
+		if (argIndex<0 || argIndex>=pDevices->Length)
 			return JoystickState();
 
 		return pDevices[argIndex]->GetState();
+	}
+
+	bool Joystick::NoJoystick::get()
+	{
+		return JoystickDevices::GetInstance()->NoJoystick;
+	}
+
+	int Joystick::NumberJoystick::get()
+	{
+		return JoystickDevices::GetInstance()->NumberJoystick;
 	}
 
 	JoystickState Joystick::GetState(PlayerIndex argPlayerIndex)
