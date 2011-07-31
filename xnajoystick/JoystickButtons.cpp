@@ -22,13 +22,10 @@ using namespace System::Collections::Generic;
 
 namespace XnaJoystick
 {
-	JoystickButtons::JoystickButtons(LPBYTE argButtons,unsigned argLng)
+	JoystickButtons::JoystickButtons(LPBYTE argButtons,unsigned argNumberButtons)
 	{
-		int pLng=argLng-1;
-		
-		for (;pLng>=0 && !argButtons[pLng];pLng--);
-		mButtons=(array<ButtonState>^) Array::CreateInstance(ButtonState::typeid,pLng+1);
-		for(int i=0;i<=pLng;i++)
+		mButtons=(array<ButtonState>^) Array::CreateInstance(ButtonState::typeid,argNumberButtons);
+		for(int i=0;i<argNumberButtons;i++)
 			mButtons[i]=(*argButtons++ & 0x80) ? ButtonState::Pressed : ButtonState::Released;
 	}
 

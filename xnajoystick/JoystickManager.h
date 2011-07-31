@@ -34,16 +34,16 @@ namespace XnaJoystick
 				std::vector<LPDIRECTINPUTDEVICE8> devices;
 		};
 
-		ref class JoystickDevices sealed
+		ref class JoystickManager sealed
 		{      
 			public:
-				static JoystickDevices ^GetInstance();
-				~JoystickDevices();
+				static JoystickManager ^GetInstance();
+				~JoystickManager();
 				property bool NoJoystick { bool get(); }
 				property array<JoystickDevice^> ^Devices { array<JoystickDevice^> ^get(); }
 				property int NumberJoystick { int get(); }
 			private:
-				static JoystickDevices ^mInstance=nullptr;
+				static JoystickManager ^mInstance=nullptr;
 				LPDIRECTINPUT8 mDI;
 				bool mNoJoystick;
 				array<JoystickDevice^> ^mDevices;
@@ -53,7 +53,7 @@ namespace XnaJoystick
 
 				 // El constructor privado no permite que se genere un constructor por defecto
         // (que es público)
-				JoystickDevices(void);
+				JoystickManager(void);
 				bool GetDevices();
 				bool GetContextListJoystick(DI_ENUM_CONTEXT &argEnumContext);
 		};

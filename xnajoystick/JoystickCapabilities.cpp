@@ -15,26 +15,24 @@
 //   You should have received a copy of the GNU General Public License
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
-
-#include "JoystickState.h"
+#include "StdAfx.h"
 #include "JoystickCapabilities.h"
-
-using namespace System;
 
 namespace XnaJoystick
 {
-	public ref class Joystick sealed
+	JoystickCapabilities::JoystickCapabilities(DIDEVCAPS &argCaps)
 	{
-		public:
-			static JoystickState GetState(int argIndex);
-			static JoystickState GetState();
-			static JoystickCapabilities GetCapabilities(int argIndex);
-			static JoystickCapabilities GetCapabilities();
-			static property bool NoJoystick { bool get(); }
-			static property int NumberJoystick { int get(); }
-			static property int IdxJoystickDefault { int get(); void set(int); }
-	private:
-			static int mIdxJoystickDefault=0;
-	};
+		mNumberButtons=argCaps.dwButtons;
+		mConnected=true;
+	}
+
+	int JoystickCapabilities::NumberButtons::get()
+	{
+		return mNumberButtons;
+	}
+
+	bool JoystickCapabilities::IsConnected::get()
+	{
+		return mConnected;
+	}
 };

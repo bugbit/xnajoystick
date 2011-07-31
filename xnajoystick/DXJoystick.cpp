@@ -18,13 +18,13 @@
 #include "stdafx.h"
 
 #include "DXJoystick.h"
-#include "JoystickDevices.h"
+#include "JoystickManager.h"
 
 namespace XnaJoystick
 {
 	JoystickState Joystick::GetState(int argIndex)
 	{
-		array<JoystickDevice^> ^pDevices=JoystickDevices::GetInstance()->Devices;
+		array<JoystickDevice^> ^pDevices=JoystickManager::GetInstance()->Devices;
 
 		if (argIndex<0 || argIndex>=pDevices->Length)
 			return JoystickState();
@@ -32,23 +32,43 @@ namespace XnaJoystick
 		return pDevices[argIndex]->GetState();
 	}
 
+	JoystickState Joystick::GetState()
+	{
+		return GetState(mIdxJoystickDefault);
+	}
+
 	bool Joystick::NoJoystick::get()
 	{
-		return JoystickDevices::GetInstance()->NoJoystick;
+		return JoystickManager::GetInstance()->NoJoystick;
 	}
 
 	int Joystick::NumberJoystick::get()
 	{
-		return JoystickDevices::GetInstance()->NumberJoystick;
+		return JoystickManager::GetInstance()->NumberJoystick;
+	}
+	
+	int Joystick::IdxJoystickDefault::get()
+	{
+		return mIdxJoystickDefault;
+	}
+	
+	void Joystick::IdxJoystickDefault::set(int argIndex)
+	{
+		mIdxJoystickDefault=argIndex;
 	}
 
-	JoystickState Joystick::GetState(PlayerIndex argPlayerIndex)
+	JoystickCapabilities Joystick::GetCapabilities(int argIndex)
 	{
-		return GetState((int) argPlayerIndex);
-	}
+		array<JoystickDevice^> ^pDevices=JoystickManager::GetInstance()->Devices;
 
-	JoystickState Joystick::GetState()
+		if (argIndex<0 || argIndex>=pDevices->Length)
+			return JoystickCapabilities();
+
+		return pDevices[argIndex]->Capabilities;
+	}
+	
+	JoystickCapabilities Joystick::GetCapabilities()
 	{
-		return GetState(PlayerIndex::One);
+		return GetCapabilities(mIdxJoystickDefault);
 	}
 };

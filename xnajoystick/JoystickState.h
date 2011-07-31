@@ -21,20 +21,15 @@
 
 #include "JoystickButtons.h"
 #include "JoystickDPad.h"
+#include "JoystickCapabilities.h"
 
 namespace XnaJoystick
 {
 	public value struct JoystickState
 	{
 	public:
-		JoystickState(DIJOYSTATE2 &argJoyState);
-		property bool IsConnected
-		{
-			bool get()
-			{
-				return mConnected;
-			}
-		}
+		JoystickState(DIJOYSTATE2 &argJoyState,JoystickCapabilities argCaps);
+		property bool IsConnected {	bool get(); }
 		property JoystickButtons Buttons { JoystickButtons get(); }
 		property JoystickDPad DPad { JoystickDPad get(); }
 

@@ -20,6 +20,7 @@
 #include <dinput.h>
 
 #include "JoystickState.h"
+#include "JoystickCapabilities.h"
 
 using namespace System;
 
@@ -34,9 +35,11 @@ namespace XnaJoystick
 		~JoystickDevice(void);
 		!JoystickDevice(void);
 		JoystickState GetState();
+		property JoystickCapabilities Capabilities { JoystickCapabilities get(); }
 	private:
 		// Track whether Dispose has been called.
 		 bool mDisposed;
 		 LPDIRECTINPUTDEVICE8 mDevice;
+		 JoystickCapabilities mCapabilities;
 	};
 };

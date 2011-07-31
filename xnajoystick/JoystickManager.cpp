@@ -19,7 +19,7 @@
 
 #include "dxutil.h"
 
-#include "JoystickDevices.h"
+#include "JoystickManager.h"
 
 using namespace System::Collections::Generic;
 
@@ -27,22 +27,22 @@ namespace XnaJoystick
 {	
 	static BOOL CALLBACK EnumJoysticksCallback(const DIDEVICEINSTANCE *pdidInstance,VOID* pContext);
 
-	JoystickDevices ^JoystickDevices::GetInstance()
+	JoystickManager ^JoystickManager::GetInstance()
 	{ 
 		if (mInstance == nullptr)
 			CreateInstance();
 		return mInstance;
 	}
 
-	void JoystickDevices::CreateInstance()
+	void JoystickManager::CreateInstance()
 	{
 		if (mInstance == nullptr)
     {
-        mInstance = gcnew JoystickDevices();
+        mInstance = gcnew JoystickManager();
     }
 	}
 	
-	JoystickDevices::JoystickDevices(void):mDI(NULL),mNoJoystick(false),mDevices(gcnew array<JoystickDevice^> {})
+	JoystickManager::JoystickManager(void):mDI(NULL),mNoJoystick(false),mDevices(gcnew array<JoystickDevice^> {})
 	{
 		HRESULT pResult;
 		LPVOID pDI;
@@ -59,27 +59,27 @@ namespace XnaJoystick
 		}
 	}
 
-	JoystickDevices::~JoystickDevices()
+	JoystickManager::~JoystickManager()
 	{
 		SAFE_RELEASE(mDI);
 	}
 
-	bool JoystickDevices::NoJoystick::get()
+	bool JoystickManager::NoJoystick::get()
 	{
 		return mNoJoystick;
 	}
 	
-	array<JoystickDevice^> ^JoystickDevices::Devices::get()
+	array<JoystickDevice^> ^JoystickManager::Devices::get()
 	{
 		return mDevices;
 	}
 
-	int JoystickDevices::NumberJoystick::get()
+	int JoystickManager::NumberJoystick::get()
 	{
 		return mDevices->Length;
 	}
 
-	bool JoystickDevices::GetDevices()
+	bool JoystickManager::GetDevices()
 	{
 		DI_ENUM_CONTEXT pEnumContext;
 		 
@@ -96,7 +96,7 @@ namespace XnaJoystick
 		return true;
 	}
 
-	bool JoystickDevices::GetContextListJoystick(DI_ENUM_CONTEXT &argEnumContext)
+	bool JoystickManager::GetContextListJoystick(DI_ENUM_CONTEXT &argEnumContext)
 	{
 		DIJOYCONFIG pPreferredJoyCfg = {0};
     IDirectInputJoyConfig8* pJoyConfig = NULL;
