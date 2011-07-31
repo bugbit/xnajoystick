@@ -21,10 +21,16 @@
 
 namespace XnaJoystick
 {
-	JoystickState::JoystickState(DIJOYSTATE2 &argJoyState)
+	JoystickState::JoystickState(DIJOYSTATE2 &argJoyState,JoystickCapabilities argCaps)
 	{
-		mButtons=JoystickButtons(argJoyState.rgbButtons,sizeof(argJoyState.rgbButtons));
+		mButtons=JoystickButtons(argJoyState.rgbButtons,argCaps.NumberButtons);
 		mDPad=JoystickDPad(argJoyState.rgdwPOV[0]);
+		mConnected=argCaps.IsConnected;
+	}
+
+	bool JoystickState::IsConnected::get()
+	{
+		return mConnected;
 	}
 
 	JoystickButtons JoystickState::Buttons::get()

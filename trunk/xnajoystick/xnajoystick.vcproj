@@ -204,15 +204,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JoystickCapabilities.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\JoystickDevice.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\JoystickDevices.cpp"
+				RelativePath=".\JoystickDPad.cpp"
 				>
 			</File>
 			<File
-				RelativePath=".\JoystickDPad.cpp"
+				RelativePath=".\JoystickManager.cpp"
 				>
 			</File>
 			<File
@@ -258,15 +262,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JoystickCapabilities.h"
+				>
+			</File>
+			<File
 				RelativePath=".\JoystickDevice.h"
 				>
 			</File>
 			<File
-				RelativePath=".\JoystickDevices.h"
+				RelativePath=".\JoystickDPad.h"
 				>
 			</File>
 			<File
-				RelativePath=".\JoystickDPad.h"
+				RelativePath=".\JoystickManager.h"
 				>
 			</File>
 			<File

@@ -24,6 +24,7 @@ namespace XnaJoystick
 {
 	JoystickDevice::JoystickDevice(LPDIRECTINPUTDEVICE8 argDevice):mDisposed(false),mDevice(NULL)
 	{
+		DIDEVCAPS pCaps;
 		// A data format specifies which controls on a device we are interested in,
 			// and how they should be reported. This tells DInput that we will be
 			// passing a DIJOYSTATE2 structure to IDirectInputDevice::GetDeviceState().
@@ -33,6 +34,10 @@ namespace XnaJoystick
 		// interact with the system and with other DInput applications.
 		/*if( FAILED( mDevice->SetCooperativeLevel( hDlg, DISCL_EXCLUSIVE|DISCL_FOREGROUND)))
 			return;*/
+		pCaps.dwSize=sizeof(pCaps);
+		if (FAILED(argDevice->GetCapabilities(&pCaps)))
+			return;
+		mCapabilities=JoystickCapabilities(pCaps);
 		mDevice=argDevice;
 	}
 
@@ -45,6 +50,11 @@ namespace XnaJoystick
 	JoystickDevice::!JoystickDevice(void)
 	{
 		SAFE_RELEASE(mDevice);
+	}
+
+	JoystickCapabilities JoystickDevice::Capabilities::get()
+	{
+		return mCapabilities;
 	}
 
 	JoystickState JoystickDevice::GetState()
@@ -73,6 +83,6 @@ namespace XnaJoystick
 		if (FAILED(pResult=mDevice->GetDeviceState(sizeof(DIJOYSTATE2),&pJoyState)))
 			return JoystickState();
 
-		return JoystickState(pJoyState);
+		return JoystickState(pJoyState,mCapabilities);
 	}
 };

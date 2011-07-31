@@ -17,24 +17,18 @@
 
 #pragma once
 
-#include "JoystickState.h"
-#include "JoystickCapabilities.h"
-
-using namespace System;
+#include <dinput.h>
 
 namespace XnaJoystick
 {
-	public ref class Joystick sealed
+	public value class JoystickCapabilities
 	{
-		public:
-			static JoystickState GetState(int argIndex);
-			static JoystickState GetState();
-			static JoystickCapabilities GetCapabilities(int argIndex);
-			static JoystickCapabilities GetCapabilities();
-			static property bool NoJoystick { bool get(); }
-			static property int NumberJoystick { int get(); }
-			static property int IdxJoystickDefault { int get(); void set(int); }
+	public:
+		JoystickCapabilities(DIDEVCAPS &argCaps);
+		property int NumberButtons { int get(); }
+		property bool IsConnected {	bool get(); }
 	private:
-			static int mIdxJoystickDefault=0;
+		int mNumberButtons;
+		bool mConnected;
 	};
 };
