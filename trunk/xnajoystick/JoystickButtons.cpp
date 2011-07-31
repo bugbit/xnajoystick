@@ -30,13 +30,11 @@ namespace XnaJoystick
 	JoystickButtons::JoystickButtons(LPBYTE argButtons,unsigned argLng)
 	{
 		int pLng=argLng-1;
-		List<ButtonState> ^pList=gcnew List<ButtonState>();
-
+		
 		for (;pLng>=0 && !argButtons[pLng];pLng--);
-		//mButtons=(array<ButtonState>^) Array::CreateInstance(ButtonState::typeid,argLng);
+		mButtons=(array<ButtonState>^) Array::CreateInstance(ButtonState::typeid,pLng+1);
 		for(int i=0;i<=pLng;i++)
-			pList->Add((*argButtons++ & 0x80) ? ButtonState::Pressed : ButtonState::Released);
-		mButtons=pList->ToArray();
+			mButtons[i]=(*argButtons++ & 0x80) ? ButtonState::Pressed : ButtonState::Released;
 	}
 
 	ButtonState JoystickButtons::GetButtonState(int argIndex)
