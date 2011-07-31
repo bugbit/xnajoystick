@@ -42,10 +42,10 @@ namespace XnaJoystick
 		X=0,Y,A,B,Back,Start,LeftShoulder,RightShoulder,LeftStick,RightStick
 	};
 
-	public ref struct JoystickButtons
+	public value struct JoystickButtons
 	{
 	public:
-		JoystickButtons(void);
+		//JoystickButtons(void);
 		JoystickButtons(LPBYTE argButtons,unsigned argLng);
 		ButtonState GetButtonState(int argIndex);
 		property ButtonState X

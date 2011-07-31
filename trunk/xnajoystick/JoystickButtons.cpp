@@ -22,10 +22,10 @@ using namespace System::Collections::Generic;
 
 namespace XnaJoystick
 {
-	JoystickButtons::JoystickButtons(void)
+	/*JoystickButtons::JoystickButtons(void)
 	{
 		mButtons=gcnew array<ButtonState> {};
-	}
+	}*/
 
 	JoystickButtons::JoystickButtons(LPBYTE argButtons,unsigned argLng)
 	{
@@ -39,7 +39,7 @@ namespace XnaJoystick
 
 	ButtonState JoystickButtons::GetButtonState(int argIndex)
 	{
-		if (argIndex<0 || argIndex>=mButtons->Length)
+		if (mButtons==nullptr || argIndex<0 || argIndex>=mButtons->Length)
 			return ButtonState::Released;
 
 		return mButtons[argIndex];

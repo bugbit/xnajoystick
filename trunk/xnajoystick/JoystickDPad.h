@@ -19,31 +19,18 @@
 
 #include <dinput.h>
 
-#include "JoystickButtons.h"
+using namespace Microsoft::Xna::Framework::Input;
 
 namespace XnaJoystick
 {
-	public value struct JoystickState
+	public value struct JoystickDPad
 	{
-	public:
-		//JoystickState();
-		JoystickState(DIJOYSTATE2 &argJoyState);
-		property bool IsConnected
-		{
-			bool get()
-			{
-				return mConnected;
-			}
-		}
-		property JoystickButtons Buttons
-		{
-			JoystickButtons get()
-			{
-				return mButtons;
-			}
-		}
-	private:
-		bool mConnected;
-		JoystickButtons mButtons;
+		public:
+			JoystickDPad(DWORD POV);
+		private:
+			ButtonState mUp;
+			ButtonState mRight;
+			ButtonState mDown;
+			ButtonState mLeft;
 	};
 };
