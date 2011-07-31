@@ -22,11 +22,6 @@ using namespace System::Collections::Generic;
 
 namespace XnaJoystick
 {
-	/*JoystickButtons::JoystickButtons(void)
-	{
-		mButtons=gcnew array<ButtonState> {};
-	}*/
-
 	JoystickButtons::JoystickButtons(LPBYTE argButtons,unsigned argLng)
 	{
 		int pLng=argLng-1;
