@@ -19,25 +19,25 @@
 
 #include <dinput.h>
 
-#include "JoystickDPad.h"
-#include "JoystickButtons.h"
-#include "JoystickAxis.h"
-#include "JoystickCapabilities.h"
-
 namespace XnaJoystick
 {
-	public value struct JoystickState
+	public value class JoystickAxis
 	{
 	public:
-		JoystickState(DIJOYSTATE2 &argJoyState,JoystickCapabilities argCaps);
-		property bool IsConnected {	bool get(); }
-		property JoystickButtons Buttons { JoystickButtons get(); }	
-		property JoystickDPad DPad { JoystickDPad get(); }
-		property JoystickAxis Axis { JoystickAxis get(); }
+		JoystickAxis(DIJOYSTATE2 &argJoyState);
+	public:
+		property int X { int get(); }
+		property int Y { int get(); }
+		property int Z { int get(); }
+		property int RotX { int get(); }
+		property int RotY { int get(); }
+		property int RotZ { int get(); }
 	private:
-		bool mConnected;
-		JoystickButtons mButtons;
-		JoystickDPad mDPad;
-		JoystickAxis mAxis;
+		int mX;
+		int mY;
+		int mZ;
+		int mRotX;
+		int mRotY;
+		int mRotZ;
 	};
 };

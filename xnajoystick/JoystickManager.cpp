@@ -54,14 +54,24 @@ namespace XnaJoystick
 		if( !FAILED( pResult = DirectInput8Create( GetModuleHandle( NULL ), DIRECTINPUT_VERSION,IID_IDirectInput8, &pDI, NULL ) ) )
 		{
 			mDI=(LPDIRECTINPUT8)pDI;
-			if (GetDevices())
-				mNoJoystick=mDevices->Length>0;
+			Detect();
 		}
 	}
 
 	JoystickManager::~JoystickManager()
 	{
 		SAFE_RELEASE(mDI);
+	}
+
+	void JoystickManager::Detect()
+	{
+		mDevices=gcnew array<JoystickDevice^> {};
+		mNoJoystick=false;
+		if (mDI!=NULL)
+		{
+			if (GetDevices())
+				mNoJoystick=mDevices->Length>0;
+		}
 	}
 
 	bool JoystickManager::NoJoystick::get()
@@ -119,8 +129,10 @@ namespace XnaJoystick
 		DI_ENUM_CONTEXT* pEnumContext = ( DI_ENUM_CONTEXT* )argContext;
 		LPDIRECTINPUTDEVICE8 pDevice;
 
-		if ( lstrcmpi(argInstance->tszProductName,L"Xbox 360")==0)
+		if ( GET_DIDEVICE_TYPE(argInstance->dwDevType)== DI8DEVTYPE_GAMEPAD )
 			return DIENUM_CONTINUE;
+		//if ( lstrcmpi(argInstance->tszProductName,L"Xbox 360")==0)
+		//	return DIENUM_CONTINUE;
 		// Obtain an interface to the enumerated joystick.
 		if( FAILED(pEnumContext->dinput->CreateDevice( argInstance->guidInstance, &pDevice, NULL)))
 			return DIENUM_CONTINUE;

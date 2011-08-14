@@ -17,13 +17,29 @@
 
 #include "StdAfx.h"
 #include "JoystickCapabilities.h"
+#include "JoystickDevice.h"
 
 namespace XnaJoystick
 {
-	JoystickCapabilities::JoystickCapabilities(DIDEVCAPS &argCaps)
+	JoystickCapabilities::JoystickCapabilities(DIDEVCAPS &argCaps,DI_ENUM_DEVICE &pEnumDevice)
+		:mEnumDevice(pEnumDevice)
+		,mType((JoystickType) GET_DIDEVICE_TYPE(argCaps.dwDevType))
+		,mSubType((JoystickSubType) GET_DIDEVICE_SUBTYPE(argCaps.dwDevType))
+		,mNumberButtons(argCaps.dwButtons)
+		,mNumberDPad(argCaps.dwPOVs)
+		,mNumberAxes(argCaps.dwAxes)
+		,mConnected(true)
+	{		
+	}
+
+	JoystickType JoystickCapabilities::Type::get()
 	{
-		mNumberButtons=argCaps.dwButtons;
-		mConnected=true;
+		return mType;
+	}
+
+	JoystickSubType JoystickCapabilities::SubType::get()
+	{
+		return mSubType;
 	}
 
 	int JoystickCapabilities::NumberButtons::get()
@@ -31,8 +47,63 @@ namespace XnaJoystick
 		return mNumberButtons;
 	}
 
+	int JoystickCapabilities::NumberDPad::get()
+	{
+		return mNumberDPad;
+	}
+
+	int JoystickCapabilities::NumberAxes::get()
+	{
+		return mNumberAxes;
+	}
+
 	bool JoystickCapabilities::IsConnected::get()
 	{
 		return mConnected;
+	}
+
+  bool JoystickCapabilities::HasAxisX::get()
+	{
+		return mEnumDevice.Flags.S.XAxis;
+	}
+
+  bool JoystickCapabilities::HasAxisY::get()
+	{
+		return mEnumDevice.Flags.S.YAxis;
+	}
+
+  bool JoystickCapabilities::HasAxisZ::get()
+	{
+		return mEnumDevice.Flags.S.ZAxis;
+	}
+
+  bool JoystickCapabilities::HasAxisRotX::get()
+	{
+		return mEnumDevice.Flags.S.RXAxis;
+	}
+
+  bool JoystickCapabilities::HasAxisRotY::get()
+	{
+		return mEnumDevice.Flags.S.RYAxis;
+	}
+
+  bool JoystickCapabilities::HasAxisRotZ::get()
+	{
+		return mEnumDevice.Flags.S.RZAxis;
+	}
+
+  bool JoystickCapabilities::HasLeftVibrationMotor::get()
+	{
+		return false;
+	}
+
+  bool JoystickCapabilities::HasRightVibrationMotor::get()
+	{
+		return false;
+	}
+
+  bool JoystickCapabilities::HasVoiceSupport::get()
+	{
+		return false;
 	}
 };

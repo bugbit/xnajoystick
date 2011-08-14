@@ -15,29 +15,48 @@
 //   You should have received a copy of the GNU General Public License
 //   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#pragma once
-
-#include <dinput.h>
-
-#include "JoystickDPad.h"
-#include "JoystickButtons.h"
+#include "StdAfx.h"
 #include "JoystickAxis.h"
-#include "JoystickCapabilities.h"
 
 namespace XnaJoystick
 {
-	public value struct JoystickState
+	JoystickAxis::JoystickAxis(DIJOYSTATE2 &argJoyState)
+		:mX(argJoyState.lX)
+		,mY(argJoyState.lY)
+		,mZ(argJoyState.lZ)
+		,mRotX(argJoyState.lRx)
+		,mRotY(argJoyState.lRy)
+		,mRotZ(argJoyState.lRz)
 	{
-	public:
-		JoystickState(DIJOYSTATE2 &argJoyState,JoystickCapabilities argCaps);
-		property bool IsConnected {	bool get(); }
-		property JoystickButtons Buttons { JoystickButtons get(); }	
-		property JoystickDPad DPad { JoystickDPad get(); }
-		property JoystickAxis Axis { JoystickAxis get(); }
-	private:
-		bool mConnected;
-		JoystickButtons mButtons;
-		JoystickDPad mDPad;
-		JoystickAxis mAxis;
-	};
+	}
+
+	int JoystickAxis::X::get()
+	{
+		return mX;
+	}
+
+	int JoystickAxis::Y::get()
+	{
+		return mY;
+	}
+
+	int JoystickAxis::Z::get()
+	{
+		return mZ;
+	}
+
+	int JoystickAxis::RotX::get()
+	{
+		return mRotX;
+	}
+
+	int JoystickAxis::RotY::get()
+	{
+		return mRotY;
+	}
+
+	int JoystickAxis::RotZ::get()
+	{
+		return mRotZ;
+	}
 };

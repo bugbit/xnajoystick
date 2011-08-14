@@ -42,6 +42,7 @@ namespace XnaJoystick
 				property bool NoJoystick { bool get(); }
 				property array<JoystickDevice^> ^Devices { array<JoystickDevice^> ^get(); }
 				property int NumberJoystick { int get(); }
+				void Detect();
 			private:
 				static JoystickManager ^mInstance=nullptr;
 				LPDIRECTINPUT8 mDI;

@@ -139,6 +139,7 @@
 				LinkIncremental="1"
 				GenerateDebugInformation="true"
 				TargetMachine="1"
+				KeyFile="xnajoystick.snk"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -200,6 +201,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JoystickAxis.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\JoystickButtons.cpp"
 				>
 			</File>
@@ -258,6 +263,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JoystickAxis.h"
+				>
+			</File>
+			<File
 				RelativePath=".\JoystickButtons.h"
 				>
 			</File>
@@ -304,6 +313,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\xnajoystick.snk"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

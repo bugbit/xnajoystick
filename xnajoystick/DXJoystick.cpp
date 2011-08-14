@@ -22,6 +22,11 @@
 
 namespace XnaJoystick
 {
+	void Joystick::DetectJoysticks()
+	{
+		JoystickManager::GetInstance()->Detect();
+	}
+
 	JoystickState Joystick::GetState(int argIndex)
 	{
 		array<JoystickDevice^> ^pDevices=JoystickManager::GetInstance()->Devices;
