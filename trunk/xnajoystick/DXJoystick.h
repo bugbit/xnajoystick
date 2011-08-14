@@ -27,6 +27,7 @@ namespace XnaJoystick
 	public ref class Joystick sealed
 	{
 		public:
+			static void DetectJoysticks();
 			static JoystickState GetState(int argIndex);
 			static JoystickState GetState();
 			static JoystickCapabilities GetCapabilities(int argIndex);
@@ -34,6 +35,8 @@ namespace XnaJoystick
 			static property bool NoJoystick { bool get(); }
 			static property int NumberJoystick { int get(); }
 			static property int IdxJoystickDefault { int get(); void set(int); }
+			static int MinRange=-1000;
+			static int MaxRange=1000;
 	private:
 			static int mIdxJoystickDefault=0;
 	};

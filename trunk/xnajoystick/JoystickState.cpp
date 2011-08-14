@@ -22,10 +22,11 @@
 namespace XnaJoystick
 {
 	JoystickState::JoystickState(DIJOYSTATE2 &argJoyState,JoystickCapabilities argCaps)
+		:mButtons((LPBYTE) &argJoyState.rgbButtons,argCaps.NumberButtons)
+		,mDPad(argJoyState.rgdwPOV[0])
+		,mAxis(argJoyState)
+		,mConnected(argCaps.IsConnected)
 	{
-		mButtons=JoystickButtons(argJoyState.rgbButtons,argCaps.NumberButtons);
-		mDPad=JoystickDPad(argJoyState.rgdwPOV[0]);
-		mConnected=argCaps.IsConnected;
 	}
 
 	bool JoystickState::IsConnected::get()
@@ -41,5 +42,10 @@ namespace XnaJoystick
 	JoystickDPad JoystickState::DPad::get()
 	{
 		return mDPad;
+	}
+
+	JoystickAxis JoystickState::Axis::get()
+	{
+		return mAxis;
 	}
 };

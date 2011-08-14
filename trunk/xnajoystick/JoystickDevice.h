@@ -26,6 +26,26 @@ using namespace System;
 
 namespace XnaJoystick
 {
+	struct DI_ENUM_DEVICE
+	{
+		union
+		{
+			unsigned Mask;			
+			struct
+			{
+				unsigned Axis:1;
+				unsigned XAxis:1;
+				unsigned YAxis:1;
+				unsigned ZAxis:1;
+				unsigned RXAxis:1;
+				unsigned RYAxis:1;
+				unsigned RZAxis:1;
+			} S;
+		} Flags;
+		LPDIRECTINPUTDEVICE8 Device;
+		DWORD MinRange,MaxRange;
+	};
+
 	value struct JoystickState;
 
 	public ref class JoystickDevice : public IDisposable
