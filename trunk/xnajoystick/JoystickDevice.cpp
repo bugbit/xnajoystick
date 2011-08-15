@@ -130,4 +130,14 @@ namespace XnaJoystick
 
 		return JoystickState(pJoyState,mCapabilities);
 	}
+
+	JoystickEffect ^JoystickDevice::CreateEffect(JoystickInitEffect ^argInitEffect)
+	{
+		LPDIRECTINPUTEFFECT pEffect;
+
+		if (FAILED(mDevice->CreateEffect(argInitEffect->GUID,argInitEffect->InitEffect,&pEffect,NULL)))
+			return nullptr;
+
+		return gcnew JoystickEffect(pEffect);
+	}
 };

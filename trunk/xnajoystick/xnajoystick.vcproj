@@ -221,6 +221,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\JoystickEffect.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\JoystickInitEffect.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\JoystickManager.cpp"
 				>
 			</File>
@@ -280,6 +288,14 @@
 			</File>
 			<File
 				RelativePath=".\JoystickDPad.h"
+				>
+			</File>
+			<File
+				RelativePath=".\JoystickEffect.h"
+				>
+			</File>
+			<File
+				RelativePath=".\JoystickInitEffect.h"
 				>
 			</File>
 			<File

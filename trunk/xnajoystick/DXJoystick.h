@@ -19,6 +19,8 @@
 
 #include "JoystickState.h"
 #include "JoystickCapabilities.h"
+#include "JoystickEffect.h"
+#include "JoystickInitEffect.h"
 
 using namespace System;
 
@@ -32,6 +34,8 @@ namespace XnaJoystick
 			static JoystickState GetState();
 			static JoystickCapabilities GetCapabilities(int argIndex);
 			static JoystickCapabilities GetCapabilities();
+			static JoystickEffect ^CreateEffect(int argIndex,JoystickInitEffect ^argInitEffect);
+			static JoystickEffect ^CreateEffect(JoystickInitEffect ^argInitEffect);
 			static property bool NoJoystick { bool get(); }
 			static property int NumberJoystick { int get(); }
 			static property int IdxJoystickDefault { int get(); void set(int); }

@@ -76,4 +76,19 @@ namespace XnaJoystick
 	{
 		return GetCapabilities(mIdxJoystickDefault);
 	}
+
+	JoystickEffect ^Joystick::CreateEffect(int argIndex,JoystickInitEffect ^argInitEffect)
+	{	
+		array<JoystickDevice^> ^pDevices=JoystickManager::GetInstance()->Devices;
+
+		if (argIndex<0 || argIndex>=pDevices->Length)
+			return nullptr;
+
+		return pDevices[argIndex]->CreateEffect(argInitEffect); 
+	}
+
+	JoystickEffect ^Joystick::CreateEffect(JoystickInitEffect ^argInitEffect)
+	{
+		return CreateEffect(mIdxJoystickDefault,argInitEffect);
+	}
 };
