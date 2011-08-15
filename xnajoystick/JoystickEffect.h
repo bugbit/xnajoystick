@@ -19,50 +19,25 @@
 
 #include <dinput.h>
 
-#include "JoystickState.h"
-#include "JoystickCapabilities.h"
-#include "JoystickEffect.h"
 #include "JoystickInitEffect.h"
 
 using namespace System;
 
 namespace XnaJoystick
 {
-	struct DI_ENUM_DEVICE
-	{
-		union
-		{
-			unsigned Mask;			
-			struct
-			{
-				unsigned Axis:1;
-				unsigned XAxis:1;
-				unsigned YAxis:1;
-				unsigned ZAxis:1;
-				unsigned RXAxis:1;
-				unsigned RYAxis:1;
-				unsigned RZAxis:1;
-			} S;
-		} Flags;
-		LPDIRECTINPUTDEVICE8 Device;
-		DWORD MinRange,MaxRange;
-	};
-
-	value struct JoystickState;
-
-	public ref class JoystickDevice : public IDisposable
+	public ref class JoystickEffect : public IDisposable
 	{
 	public:
-		JoystickDevice(LPDIRECTINPUTDEVICE8 argDevice);
-		~JoystickDevice(void);
-		!JoystickDevice(void);
-		JoystickState GetState();
-		property JoystickCapabilities Capabilities { JoystickCapabilities get(); }
-		JoystickEffect ^CreateEffect(JoystickInitEffect ^argInitEffect);
+		static const int NominalMax=DI_FFNOMINALMAX;
+	public:
+		~JoystickEffect();
+		!JoystickEffect();
 	private:
 		// Track whether Dispose has been called.
-		 bool mDisposed;
-		 LPDIRECTINPUTDEVICE8 mDevice;
-		 JoystickCapabilities mCapabilities;
+		bool mDisposed;
+	protected:
+		LPDIRECTINPUTEFFECT mEffect;
+	internal:
+		JoystickEffect(LPDIRECTINPUTEFFECT argEffect);
 	};
 };
