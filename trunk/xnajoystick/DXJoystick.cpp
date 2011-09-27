@@ -37,6 +37,11 @@ namespace XnaJoystick
 		return pDevices[argIndex]->GetState();
 	}
 
+	JoystickState Joystick::GetState(PlayerIndex argIndex)
+	{
+		return GetState((int) argIndex);
+	}
+
 	JoystickState Joystick::GetState()
 	{
 		return GetState(mIdxJoystickDefault);
@@ -71,6 +76,11 @@ namespace XnaJoystick
 
 		return pDevices[argIndex]->Capabilities;
 	}
+
+	JoystickCapabilities Joystick::GetCapabilities(PlayerIndex argIndex)
+	{
+		return GetCapabilities((int) argIndex);
+	}
 	
 	JoystickCapabilities Joystick::GetCapabilities()
 	{
@@ -87,8 +97,33 @@ namespace XnaJoystick
 		return pDevices[argIndex]->CreateEffect(argInitEffect); 
 	}
 
+	JoystickEffect ^Joystick::CreateEffect(PlayerIndex argIndex,JoystickInitEffect ^argInitEffect)
+	{
+		return CreateEffect((int) argIndex,argInitEffect);
+	}
+
 	JoystickEffect ^Joystick::CreateEffect(JoystickInitEffect ^argInitEffect)
 	{
 		return CreateEffect(mIdxJoystickDefault,argInitEffect);
+	}
+	
+	void Joystick::SetExclusive(int argIndex,Game ^argGame)
+	{
+		array<JoystickDevice^> ^pDevices=JoystickManager::GetInstance()->Devices;
+
+		if (argIndex<0 || argIndex>=pDevices->Length)
+			return;
+
+		return pDevices[argIndex]->SetExclusive(argGame); 
+	}
+
+	void Joystick::SetExclusive(PlayerIndex argIndex,Game ^argGame)
+	{
+		SetExclusive((int) argIndex,argGame);
+	}
+
+	void Joystick::SetExclusive(Game ^argGame)
+	{
+		return SetExclusive(mIdxJoystickDefault,argGame);
 	}
 };

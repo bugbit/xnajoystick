@@ -45,6 +45,7 @@ namespace XnaJoystick
 				void Detect();
 			private:
 				static JoystickManager ^mInstance=nullptr;
+				IntPtr mHwndExclusive;
 				LPDIRECTINPUT8 mDI;
 				bool mNoJoystick;
 				array<JoystickDevice^> ^mDevices;

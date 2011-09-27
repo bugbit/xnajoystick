@@ -42,7 +42,10 @@ namespace XnaJoystick
     }
 	}
 	
-	JoystickManager::JoystickManager(void):mDI(NULL),mNoJoystick(false),mDevices(gcnew array<JoystickDevice^> {})
+	JoystickManager::JoystickManager(void)
+		:mDI(NULL)
+		,mNoJoystick(false)
+		,mDevices(gcnew array<JoystickDevice^> {})
 	{
 		HRESULT pResult;
 		LPVOID pDI;
@@ -100,7 +103,10 @@ namespace XnaJoystick
 		std::vector<LPDIRECTINPUTDEVICE8>::iterator it=pEnumContext.devices.begin(),itend=pEnumContext.devices.end();
 		List<JoystickDevice^> ^pDevices=gcnew List<JoystickDevice^>();
 		for (;it!=itend;it++)
-			pDevices->Add(gcnew JoystickDevice(*it));
+		{
+			JoystickDevice ^pDevice=gcnew JoystickDevice(*it);
+			pDevices->Add(pDevice);
+		}
 		mDevices=pDevices->ToArray();
 
 		return true;

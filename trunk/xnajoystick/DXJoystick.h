@@ -23,6 +23,7 @@
 #include "JoystickInitEffect.h"
 
 using namespace System;
+using namespace Microsoft::Xna::Framework;
 
 namespace XnaJoystick
 {
@@ -31,11 +32,17 @@ namespace XnaJoystick
 		public:
 			static void DetectJoysticks();
 			static JoystickState GetState(int argIndex);
+			static JoystickState GetState(PlayerIndex argIndex);
 			static JoystickState GetState();
 			static JoystickCapabilities GetCapabilities(int argIndex);
+			JoystickCapabilities GetCapabilities(PlayerIndex argIndex);
 			static JoystickCapabilities GetCapabilities();
 			static JoystickEffect ^CreateEffect(int argIndex,JoystickInitEffect ^argInitEffect);
+			static JoystickEffect ^CreateEffect(PlayerIndex argIndex,JoystickInitEffect ^argInitEffect);
 			static JoystickEffect ^CreateEffect(JoystickInitEffect ^argInitEffect);
+			static void SetExclusive(int argIndex,Game ^argGame);
+			static void SetExclusive(PlayerIndex argIndex,Game ^argGame);
+			static void SetExclusive(Game ^argGame);
 			static property bool NoJoystick { bool get(); }
 			static property int NumberJoystick { int get(); }
 			static property int IdxJoystickDefault { int get(); void set(int); }
