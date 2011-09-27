@@ -20,8 +20,9 @@
 
 namespace XnaJoystick
 {
-	JoystickEffect::JoystickEffect(LPDIRECTINPUTEFFECT argEffect)
+	JoystickEffect::JoystickEffect(LPDIRECTINPUTDEVICE8 argDevice,LPDIRECTINPUTEFFECT argEffect)
 		:mDisposed(false)
+		,mDevice(argDevice)
 		,mEffect(argEffect)
 	{
 	}
@@ -35,5 +36,45 @@ namespace XnaJoystick
 	JoystickEffect::!JoystickEffect()
 	{
 		SAFE_RELEASE(mEffect);
+	}
+
+	void JoystickEffect::Start(int argIterations,JoystickFlagsEffect argFlags)
+	{
+		HRESULT pResult;
+
+		mDevice->Acquire();
+		pResult=mEffect->Start(argIterations,(int) argFlags);
+		switch (pResult)
+		{
+			case DIERR_INCOMPLETEEFFECT:
+				throw gcnew ArgumentException("Effect::Start DIERR_INCOMPLETEEFFECT");
+			case DIERR_INVALIDPARAM:
+				throw gcnew ArgumentException("Effect::Start DIERR_INVALIDPARAM");
+			case DIERR_NOTEXCLUSIVEACQUIRED:
+				throw gcnew ArgumentException("Effect::Start DIERR_NOTEXCLUSIVEACQUIRED");
+			case DIERR_NOTINITIALIZED:
+				throw gcnew ArgumentException("Effect::Start DIERR_NOTINITIALIZED");
+			case  DIERR_UNSUPPORTED:
+				throw gcnew ArgumentException("Effect::Start  DIERR_UNSUPPORTED");
+			case DI_OK:
+				return;
+			default:
+				throw gcnew ArgumentException("FAILED CreateEffect");
+		}
+	}
+
+	void JoystickEffect::Start(int argIterations)
+	{
+		Start(argIterations,JoystickFlagsEffect::None);
+	}
+
+	void JoystickEffect::Start(JoystickFlagsEffect argFlags)
+	{
+		Start(1,argFlags);
+	}
+		
+	void JoystickEffect::Start()
+	{
+		Start(JoystickFlagsEffect::None);
 	}
 };

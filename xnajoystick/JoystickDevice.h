@@ -25,6 +25,7 @@
 #include "JoystickInitEffect.h"
 
 using namespace System;
+using namespace Microsoft::Xna::Framework;
 
 namespace XnaJoystick
 {
@@ -59,6 +60,7 @@ namespace XnaJoystick
 		JoystickState GetState();
 		property JoystickCapabilities Capabilities { JoystickCapabilities get(); }
 		JoystickEffect ^CreateEffect(JoystickInitEffect ^argInitEffect);
+		void SetExclusive(Game ^argGame);
 	private:
 		// Track whether Dispose has been called.
 		 bool mDisposed;

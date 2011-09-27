@@ -25,19 +25,32 @@ using namespace System;
 
 namespace XnaJoystick
 {
+	[Flags]
+	public enum class JoystickFlagsEffect
+	{
+		None=0,
+		Solo=DIES_SOLO,
+		NoDownload=DIES_NODOWNLOAD 
+	};
+
 	public ref class JoystickEffect : public IDisposable
 	{
 	public:
 		static const int NominalMax=DI_FFNOMINALMAX;
+		static const int Infinite=INFINITE;
 	public:
 		~JoystickEffect();
 		!JoystickEffect();
+		void Start(int argIterations,JoystickFlagsEffect argFlags);
+		void Start(int argIterations);
+		void Start(JoystickFlagsEffect argFlags);
+		void Start();
 	private:
 		// Track whether Dispose has been called.
 		bool mDisposed;
-	protected:
+		LPDIRECTINPUTDEVICE8 mDevice;
 		LPDIRECTINPUTEFFECT mEffect;
 	internal:
-		JoystickEffect(LPDIRECTINPUTEFFECT argEffect);
+		JoystickEffect(LPDIRECTINPUTDEVICE8 argDevice,LPDIRECTINPUTEFFECT argEffect);
 	};
 };

@@ -134,10 +134,59 @@ namespace XnaJoystick
 	JoystickEffect ^JoystickDevice::CreateEffect(JoystickInitEffect ^argInitEffect)
 	{
 		LPDIRECTINPUTEFFECT pEffect;
+		LPDIEFFECT pInitEfect=argInitEffect->InitEffect;
+		HRESULT pResult=mDevice->CreateEffect(argInitEffect->GUID,pInitEfect,&pEffect,NULL);
 
-		if (FAILED(mDevice->CreateEffect(argInitEffect->GUID,argInitEffect->InitEffect,&pEffect,NULL)))
-			return nullptr;
+//		DIEFFECT diEffect;               // parameters for created effect
+//DWORD    dwAxes[2] = { DIJOFS_X, DIJOFS_Y };
+//LONG     lDirection[2] = { 9700, 0 };
+//DICONSTANTFORCE diConstantForce; 
+//
+//diConstantForce.lMagnitude = 9700;   // Full force
+//diEffect.dwSize          = sizeof(DIEFFECT); 
+//diEffect.dwFlags         = DIEFF_CARTESIAN | DIEFF_OBJECTOFFSETS; 
+//diEffect.dwDuration      = INFINITE;
+//diEffect.dwSamplePeriod  = 0;                 // = default 
+//diEffect.dwGain          = DI_FFNOMINALMAX;   // No scaling
+//diEffect.dwTriggerButton = DIEB_NOTRIGGER;    // Not a button response
+//diEffect.dwTriggerRepeatInterval = 0;         // Not applicable
+//diEffect.cAxes                   = 1; 
+//diEffect.rgdwAxes                = &dwAxes[0]; 
+//diEffect.rglDirection            = &lDirection[0]; 
+//diEffect.lpEnvelope              = NULL; 
+//diEffect.cbTypeSpecificParams    = sizeof(DICONSTANTFORCE);
+//diEffect.lpvTypeSpecificParams   = &diConstantForce;  
+//diEffect.dwStartDelay = 0;
+//
+//HRESULT pResult=mDevice->CreateEffect(GUID_ConstantForce,
+//                           &diEffect,
+//                           &pEffect,
+//						   NULL);		
 
-		return gcnew JoystickEffect(pEffect);
+		if (!FAILED(pResult))
+			return gcnew JoystickEffect(mDevice,pEffect);
+		switch (pResult)
+		{
+			case DIERR_DEVICEFULL:
+				throw gcnew ArgumentException("CreateEffect DIERR_DEVICEFULL");
+			case DIERR_DEVICENOTREG:
+				throw gcnew ArgumentException("CreateEffect DIERR_DEVICENOTREG");
+			case DIERR_INVALIDPARAM:
+				throw gcnew ArgumentException("CreateEffect DIERR_INVALIDPARAM");
+			case DIERR_NOTINITIALIZED:
+				throw gcnew ArgumentException("CreateEffect DIERR_NOTINITIALIZED");
+			default:
+				throw gcnew ArgumentException("FAILED CreateEffect");
+		}
+	}
+	
+	void JoystickDevice::SetExclusive(Game ^argGame)
+	{
+		HRESULT pResult;
+		 // Set the cooperative level to let DInput know how this device should
+    // interact with the system and with other DInput applications.
+    // Exclusive access is required in order to perform force feedback.
+		HWND pHwndExclusive=(HWND) argGame->Window->Handle.ToPointer();
+		pResult = mDevice->SetCooperativeLevel(pHwndExclusive,DISCL_EXCLUSIVE | DISCL_FOREGROUND);
 	}
 };
