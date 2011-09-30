@@ -3,16 +3,44 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "xnajoystick", "xnajoystick\xnajoystick.vcproj", "{9A406557-C2C1-4566-9998-48CA668DB0C7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestJoystickGame", "TestJoystickGame\TestJoystickGame.csproj", "{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
+		Debug|x86 = Debug|x86
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Debug|Win32.ActiveCfg = Debug|Win32
 		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Debug|Win32.Build.0 = Debug|Win32
+		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Debug|x86.ActiveCfg = Debug|Win32
+		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Release|Win32.ActiveCfg = Release|Win32
 		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Release|Win32.Build.0 = Release|Win32
+		{9A406557-C2C1-4566-9998-48CA668DB0C7}.Release|x86.ActiveCfg = Release|Win32
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Debug|Win32.ActiveCfg = Debug|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Debug|x86.ActiveCfg = Debug|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Debug|x86.Build.0 = Debug|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Release|Win32.ActiveCfg = Release|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Release|x86.ActiveCfg = Release|x86
+		{18F8DD9E-944D-4640-981C-AC7A3C8B1D3D}.Release|x86.Build.0 = Release|x86
+		{4BB11F69-7EB7-4F75-8341-37759316044A}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{4BB11F69-7EB7-4F75-8341-37759316044A}.Debug|Win32.ActiveCfg = Debug|x86
+		{4BB11F69-7EB7-4F75-8341-37759316044A}.Debug|x86.ActiveCfg = Debug|x86
+		{4BB11F69-7EB7-4F75-8341-37759316044A}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{4BB11F69-7EB7-4F75-8341-37759316044A}.Release|Win32.ActiveCfg = Release|x86
+		{4BB11F69-7EB7-4F75-8341-37759316044A}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
