@@ -48,7 +48,7 @@ using namespace System::Security::Permissions;
 // Puede especificar todos los valores o usar los valores predeterminados de número de versión de compilación y de revisión
 // mediante el asterisco ('*'), como se muestra a continuación:
 
-[assembly:AssemblyVersionAttribute("1.0.*")];
+[assembly:AssemblyVersionAttribute("1.0.0.0")];
 
 [assembly:ComVisible(false)];
 
